@@ -2,6 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 
+// Components (User "views")
+import FeelingRating from '../FeelingRating/FeelingRating';
+
+
 function App() {
 
   return (
@@ -10,6 +14,7 @@ function App() {
         <h1 className='App-title'>Feedback!</h1>
         <h4>Don't forget it!</h4>
       </header>
+      <FeelingRating />
     </div>
   );
 }

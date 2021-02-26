@@ -5,7 +5,7 @@ function FeelingRating(){
   const dispatch = useDispatch();
 
   // local state for input
-  const [feeling, setFeeling] = useState(0);
+  const [feeling, setFeeling] = useState('');
   
 
   const handleSubmit = (event) => {

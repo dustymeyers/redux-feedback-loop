@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 /**
  * UnderstandingRating Renders the Second Form View for Feedback
@@ -10,6 +11,7 @@ import { useDispatch } from 'react-redux';
 
 function UnderstandingRating() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // local state for input
   const [understanding, setUnderstanding] = useState('');
@@ -32,6 +34,9 @@ function UnderstandingRating() {
 
     // reset local state on submission
     setUnderstanding('');
+
+    // move user to the next page 
+    history.push('/question3');
   }
 
   return(

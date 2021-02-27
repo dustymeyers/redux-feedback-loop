@@ -7,6 +7,16 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   const dispatch = useDispatch();
   const feedback = useSelector(store => store.feedback);
 
+  // resets the feedback reducer to original state (pre-form input)
+  const routeToHome = () => {
+    // clear our feedback reducer
+    dispatch({ type: 'CLEAR_FEEDBACK' });
+    // send user back to the Home page
+    history.push('/');
+  };
+
+  // Submits feedback scores/comments stored in feedback reducer
+  // Axios post sends data to DB
   const submitFeedback = () => {
     console.log('in submitFeedback', feedback.feeling);
 
@@ -28,14 +38,6 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
       routeToHome();
     } // end submitFeedback
 
-  // resets the feedback reducer to original state (pre-form input)
-  const routeToHome = () => {
-    // clear our feedback reducer
-    dispatch({ type: 'CLEAR_FEEDBACK' });
-    // send user back to the Home page
-    history.push('/');
-  };
-
   return(
     <>
       {/* Ratings for feeling, understanding, and support must not be empty (undefined) 
@@ -44,11 +46,12 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
       ? (
           <>
             <h2>Review Your Feedback</h2>
-            <h4>Feeling: {feedback.feeling} </h4>
-            <h4>Understanding: {feedback.understanding}</h4>
-            <h4>Support: {feedback.support}</h4>
-            <h4>Comments: {feedback.comments}</h4>
+            <h4 onClick={() => history.push('/question1')}>Feeling: {feedback.feeling} </h4>
+            <h4 onClick={() => history.push('/question2')}>Understanding: {feedback.understanding}</h4>
+            <h4 onClick={() => history.push('/question3')}>Support: {feedback.support}</h4>
+            <h4 onClick={() => history.push('/question4')}>Comments: {feedback.comments}</h4>
             <button onClick={submitFeedback}>Submit</button>
+            <p>Feel free to click on a feedback score to edit it.</p>
           </>
         ) : routeToHome()} 
     </>

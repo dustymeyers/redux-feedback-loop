@@ -7,6 +7,7 @@ import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom'
 import AdditionalComments from '../AdditionalComments/AdditionalComments';
 import FeelingRating from '../FeelingRating/FeelingRating';
 import Home from '../Home/Home';
+import ReviewFeedback from '../ReviewFeedback/ReviewFeedback'
 import SupportRating from '../SupportRating/SupportRating';
 import UnderstandingRating from '../UnderstandingRating/UnderstandingRating';
 
@@ -54,6 +55,10 @@ function App() {
         </Route>
 
         {/* 5th view, Review Feedback Before Submission to DB */}
+        {/* Review your feedback before submission. */}
+        <Route path="/reviewFeedback">
+          <ReviewFeedback />
+        </Route>
 
       </Router>
 

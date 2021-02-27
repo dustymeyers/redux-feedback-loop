@@ -37,7 +37,7 @@ function AdditionalComments(){
     setComments('');
 
     // move user to the next page 
-    history.push('/');
+    history.push('/reviewFeedback');
   }
 
   return(

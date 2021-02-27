@@ -71,7 +71,7 @@ const feedback = (state = {}, action) => {
      *  feeling: (score 1 out of 5), 
      *  understanding: (score 1 out of 5), 
      *  support: (score 1 out of 5), 
-     *  comments: 'A string of text from user, could be blank (optional)' 
+     *  comments: 'A string of text from user, could be blank (optional).' 
      * }
      */
   }

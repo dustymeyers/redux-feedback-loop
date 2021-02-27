@@ -1,61 +1,58 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 /**
- * FeelingRating Renders the First Form View for Feedback
+ * UnderstandingRating Renders the Second Form View for Feedback
  * 
  * Form validates that the proper data is sent to DB.
  * Form dispatches input to the global state.
  */
 
-function FeelingRating(){
+function UnderstandingRating() {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   // local state for input
-  const [feeling, setFeeling] = useState('');
+  const [understanding, setUnderstanding] = useState('');
   
   // on FeelingRating form submission validate and dispatch appropriate data
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log('in handleSubmit, feeling is: ', feeling);
+    console.log('in handleSubmit, feeling is: ', understanding);
     // validate data on form submission
-    if (feeling === ''){
+    if (understanding === ''){
       return alert('Please enter a number between 1 and 5 before submission.')
     }
     
     // if there is data, send local state to be stored in reducer
     dispatch({
-      type: 'ADD_FEELING_RATING',
-      payload: { feeling }
+      type: 'ADD_UNDERSTANDING_RATING',
+      payload: { feeling: understanding }
     })
 
     // reset local state on submission
-    setFeeling('');
-
-    // move user to the next page 
-    history.push('/2');
+    setUnderstanding('');
   }
 
   return(
     <>
-      <h2>How are you feeling today?</h2>
+      <h2>How well are you understanding the content? </h2>
       <form onSubmit={handleSubmit}>
         <input 
           // forces the input value from string to number from submission
-          onChange={event => setFeeling(Number(event.target.value))} 
+          onChange={event => setUnderstanding(Number(event.target.value))} 
           type="number" 
-          placeholder="1-5" 
+          placeholder="1 - 5" 
           min = "1" 
           max="5" 
-          value={feeling}
+          value={understanding}
         />
+        {/* TODO - history.push to UnderstandingRating */}
         <button>Next</button>
       </form>
     </>
   );
-}
 
-export default FeelingRating;
+} // end UnderstandingRating
+
+export default UnderstandingRating;

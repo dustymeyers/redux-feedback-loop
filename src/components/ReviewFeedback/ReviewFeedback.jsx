@@ -5,12 +5,10 @@ import { useHistory } from 'react-router-dom';
 function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   const history = useHistory();
   const dispatch = useDispatch();
-
   const feedback = useSelector(store => store.feedback);
 
   const submitFeedback = () => {
-    console.log('in submitFeedback');
-    console.log(feedback.feeling);
+    console.log('in submitFeedback', feedback.feeling);
 
     // axios POST to DB
     axios.post('/api/feedback', feedback)

@@ -38,7 +38,7 @@ function UnderstandingRating() {
 
     // move user to the next page 
     history.push('/question3');
-  }
+  } // end handleSubmit
 
   return(
     <>

@@ -38,7 +38,7 @@ function FeelingRating(){
 
     // move user to the next page 
     history.push('/question2');
-  }
+  } // end handleSubmit
 
   return(
     <>
@@ -58,6 +58,6 @@ function FeelingRating(){
       </form>
     </>
   );
-}
+} // end FeelingRating
 
 export default FeelingRating;

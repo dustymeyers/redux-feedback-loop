@@ -38,7 +38,7 @@ function AdditionalComments(){
 
     // move user to the next page 
     history.push('/reviewFeedback');
-  }
+  } // end handleSubmit
 
   return(
     <>

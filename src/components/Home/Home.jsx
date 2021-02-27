@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom';
 import './Home.css';
 
+
+/**
+ * Renders Home Screen '/'
+ * 
+ * Uses conditional rendering to check if a submission was previously submitted.
+ * Uses props to store boolean data before/after form submission.
+ */
 function Home ({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   console.log('isFeedbackSubmitted', isFeedbackSubmitted);
 
+  // Used for rendering sections of Home page.
   let homeMessage, buttonDisplay;
   
   /**
@@ -12,16 +20,18 @@ function Home ({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
    * True - Renders "Thanks for submit." message and "Give New Feedback" button.
    * False - Default state  set to render without thank you and button renders "Give Feedback".
    */
-  
+
   if (isFeedbackSubmitted === true) {
     homeMessage = (
       <h3 className="successMessage">
         Thanks for your submission! Would you like to submit your feedback again?
       </h3>
     );
+
     buttonDisplay = 'Give New Feedback';
   } else {
     homeMessage = (<h4>Submit your feedback</h4>);
+    
     buttonDisplay = 'Give Feedback';
   }
   

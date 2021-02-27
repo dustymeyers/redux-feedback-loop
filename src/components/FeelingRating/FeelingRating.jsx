@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 /**
  * FeelingRating Renders the First Form View for Feedback
+ * /question1
  * 
  * Form validates that the proper data is sent to DB.
  * Form dispatches input to the global state.
@@ -21,7 +22,7 @@ function FeelingRating(){
     event.preventDefault();
 
     history.push('/');
-  }
+  } // end handleBack
   
   // on FeelingRating form submission validate and dispatch appropriate data
   const handleSubmit = (event) => {

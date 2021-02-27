@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 /**
  * SupportRating Renders the Third Form View for Feedback
+ * "/question3"
  * 
  * Form validates that the proper data is sent to DB.
  * Form dispatches input to the global state.
@@ -15,6 +16,13 @@ function SupportRating() {
 
   // local state for input
   const [support, setSupport] = useState('');
+
+  // go back to previous page
+  const handleBack = (event) => {
+    event.preventDefault();
+
+    history.push('/question2');
+  } // end handleBack
   
   // on form submission validate and dispatch appropriate data
   const handleSubmit = (event) => {
@@ -44,6 +52,7 @@ function SupportRating() {
     <>
       <h2>How well are you being supported?</h2>
       <form onSubmit={handleSubmit}>
+        <button onClick={handleBack}>Back</button>
         <input 
           // forces the input value from string to number from submission
           onChange={event => setSupport(Number(event.target.value))} 

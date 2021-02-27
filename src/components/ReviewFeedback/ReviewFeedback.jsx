@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {

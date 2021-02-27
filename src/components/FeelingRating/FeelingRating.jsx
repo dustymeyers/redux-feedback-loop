@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 /**
  * FeelingRating Renders the First Form View for Feedback
- * /question1
+ * "/question1"
  * 
  * Form validates that the proper data is sent to DB.
  * Form dispatches input to the global state.
@@ -12,10 +12,23 @@ import { useHistory } from 'react-router-dom';
 
 function FeelingRating(){
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useHistory(); 
+  const feedback = useSelector(store => store.feedback);
+
+  let feelingReduxState;
+
+  // conditional to set local react state and avoid undefined.
+  // if editing a previous entry, will show current reducer state in input
+  if (feedback.feeling) {
+    console.log('feeling is', feedback.feeling);
+    feelingReduxState = feedback.feeling;
+  } else {
+    console.log('feeling is undefined');
+    feelingReduxState = '';
+  }
 
   // local state for input
-  const [feeling, setFeeling] = useState('');
+  const [feeling, setFeeling] = useState(feelingReduxState);
 
   // go back to previous page
   const handleBack = (event) => {
@@ -38,7 +51,7 @@ function FeelingRating(){
     // if there is data, send local state to be stored in reducer
     dispatch({
       type: 'SET_FEELING_RATING',
-      payload: { feeling }
+      payload: { property: 'feeling', value: feeling }
     })
 
     // reset local state on submission

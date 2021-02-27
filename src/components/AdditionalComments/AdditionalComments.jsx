@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 /**
@@ -13,9 +13,22 @@ import { useHistory } from 'react-router-dom';
 function AdditionalComments(){
   const dispatch = useDispatch();
   const history = useHistory();
+  const feedback = useSelector(store => store.feedback);
+
+  let commentsReduxState;
+
+  // conditional to set local react state and avoid undefined.
+  // if editing a previous entry, will show current reducer state in input
+  if (feedback.comments) {
+    console.log('comments is', feedback.comments);
+    commentsReduxState = feedback.comments;
+  } else {
+    console.log('support is undefined');
+    commentsReduxState = '';
+  }
 
   // local state for input
-  const [comments, setComments] = useState('');
+  const [comments, setComments] = useState(commentsReduxState);
 
   // go back to previous page
   const handleBack = (event) => {

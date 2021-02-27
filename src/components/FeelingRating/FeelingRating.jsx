@@ -21,6 +21,7 @@ function FeelingRating(){
     event.preventDefault();
 
     console.log('in handleSubmit, feeling is: ', feeling);
+
     // validate data on form submission
     if (feeling === ''){
       return alert('Please enter a number between 1 and 5 before submission.')
@@ -28,7 +29,7 @@ function FeelingRating(){
     
     // if there is data, send local state to be stored in reducer
     dispatch({
-      type: 'ADD_FEELING_RATING',
+      type: 'SET_FEELING_RATING',
       payload: { feeling }
     })
 

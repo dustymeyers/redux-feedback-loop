@@ -6,6 +6,7 @@ import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom'
 // Components (User "views")
 import FeelingRating from '../FeelingRating/FeelingRating';
 import Home from '../Home/Home';
+import SupportRating from '../SupportRating/SupportRating';
 import UnderstandingRating from '../UnderstandingRating/UnderstandingRating';
 
 
@@ -41,6 +42,9 @@ function App() {
 
         {/* 3rd view, Input Support Rating */}
         {/* How well are you being supported? */}
+        <Route path="/question3">
+            <SupportRating />
+        </Route>
 
         {/* 4th view, Input Additional Comments */}
         {/* Any comments you want to leave? */}

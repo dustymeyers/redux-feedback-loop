@@ -4,6 +4,7 @@ import './App.css';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
 
 // Components (User "views")
+import Admin from '../Admin/Admin';
 import AdditionalComments from '../AdditionalComments/AdditionalComments';
 import FeelingRating from '../FeelingRating/FeelingRating';
 import Home from '../Home/Home';
@@ -67,6 +68,10 @@ function App() {
         {/* Review your feedback before submission. */}
         <Route path="/reviewFeedback">
           <ReviewFeedback setIsFeedbackSubmitted={setIsFeedbackSubmitted} />
+        </Route>
+
+        <Route path="/admin">
+          <Admin />
         </Route>
 
       </Router>

@@ -7,6 +7,8 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   const dispatch = useDispatch();
   const feedback = useSelector(store => store.feedback);
 
+  
+
   // resets the feedback reducer to original state (pre-form input)
   const routeToHome = () => {
     // clear our feedback reducer
@@ -46,10 +48,23 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
       ? (
           <>
             <h2>Review Your Feedback</h2>
-            <h4 onClick={() => history.push('/question1')}>Feeling: {feedback.feeling} </h4>
-            <h4 onClick={() => history.push('/question2')}>Understanding: {feedback.understanding}</h4>
-            <h4 onClick={() => history.push('/question3')}>Support: {feedback.support}</h4>
-            <h4 onClick={() => history.push('/question4')}>Comments: {feedback.comments}</h4>
+
+            <h4 onClick={() => history.push('/question1')}>
+                Feeling: {feedback.feeling} 
+            </h4>
+
+            <h4 onClick={() => history.push('/question2')}>
+              Understanding: {feedback.understanding}
+            </h4>
+
+            <h4 onClick={() => history.push('/question3')}>
+              Support: {feedback.support}
+            </h4>
+
+            <h4 onClick={() => history.push('/question4')}>
+              Comments: {feedback.comments ? feedback.comments : 'No comments were given.'}
+            </h4>
+            
             <button onClick={submitFeedback}>Submit</button>
             <p>Feel free to click on a feedback score to edit it.</p>
           </>

@@ -2,6 +2,25 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
+// GET Route - /api/feedback
+router.get('/', (req, res) => {
+  console.log('GET /api/feedback');
+
+  /**
+   * Query to DB should look like:
+   * 
+   * SELECT * FROM "feedback" 
+   * ORDER BY "date" ASC;
+   */
+
+  // SQL query to send to DB
+  let queryText = 'SELECT * FROM "feedback" ORDER BY "date" ASC;';
+
+  pool.query(queryText)
+    .then(dbRes => res.send(dbRes.rows))
+    .catch(err => console.log('There was an error:', err))
+}) // end router.get /api/feedback
+
 // POST Route - /api/feedback
 // send user feedback to server
 router.post('/', (req, res) => {

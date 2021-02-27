@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 /**
  * UnderstandingRating Renders the Second Form View for Feedback
+ * "/question2"
  * 
  * Form validates that the proper data is sent to DB.
  * Form dispatches input to the global state.
@@ -12,9 +13,29 @@ import { useHistory } from 'react-router-dom';
 function UnderstandingRating() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const feedback = useSelector(store => store.feedback);
+
+  let understandingReduxState;
+
+  // conditional to set local react state and avoid undefined.
+  // if editing a previous entry, will show current reducer state in input
+  if (feedback.understanding) {
+    console.log('understanding is', feedback.understanding);
+    understandingReduxState = feedback.understanding;
+  } else {
+    console.log('understanding is undefined');
+    understandingReduxState = '';
+  }
 
   // local state for input
-  const [understanding, setUnderstanding] = useState('');
+  const [understanding, setUnderstanding] = useState(understandingReduxState);
+
+  // go back to previous page
+  const handleBack = (event) => {
+    event.preventDefault();
+
+    history.push('/question1');
+  } // end handleBack
   
   // on form submission validate and dispatch appropriate data
   const handleSubmit = (event) => {
@@ -23,7 +44,7 @@ function UnderstandingRating() {
     console.log('in handleSubmit, understanding is: ', understanding);
 
     // validate data on form submission
-    if (understanding === ''){
+    if (understanding === '') {
       return alert('Please enter a number between 1 and 5 before submission.')
     }
     
@@ -44,6 +65,7 @@ function UnderstandingRating() {
     <>
       <h2>How well are you understanding the content?</h2>
       <form onSubmit={handleSubmit}>
+        <button onClick={handleBack}>Back</button>
         <input 
           // forces the input value from string to number from submission
           onChange={event => setUnderstanding(Number(event.target.value))} 

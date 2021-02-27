@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 /**
  * AdditionalComments Renders the Fourth Form View for Feedback
+ * "/question4"
  * 
  * Form validates that the proper data is sent to DB.
  * Form dispatches input to the global state.
@@ -12,20 +13,35 @@ import { useHistory } from 'react-router-dom';
 function AdditionalComments(){
   const dispatch = useDispatch();
   const history = useHistory();
+  const feedback = useSelector(store => store.feedback);
+
+  let commentsReduxState;
+
+  // conditional to set local react state and avoid undefined.
+  // if editing a previous entry, will show current reducer state in input
+  if (feedback.comments) {
+    console.log('comments is', feedback.comments);
+    commentsReduxState = feedback.comments;
+  } else {
+    console.log('support is undefined');
+    commentsReduxState = '';
+  }
 
   // local state for input
-  const [comments, setComments] = useState('');
+  const [comments, setComments] = useState(commentsReduxState);
+
+  // go back to previous page
+  const handleBack = (event) => {
+    event.preventDefault();
+
+    history.push('/question3');
+  } // end handleBack
   
   // on form submission validate and dispatch appropriate data
   const handleSubmit = (event) => {
     event.preventDefault();
 
     console.log('in handleSubmit, understanding is: ', comments);
-
-    // validate data on form submission
-    if (comments === ''){
-      return alert('Please enter a number between 1 and 5 before submission.')
-    }
     
     // if there is data, send local state to be stored in reducer
     dispatch({
@@ -44,6 +60,7 @@ function AdditionalComments(){
     <>
       <h2>How well are you understanding the content?</h2>
       <form onSubmit={handleSubmit}>
+        <button onClick={handleBack}>Back</button>
         <textarea
           onChange={event => setComments(event.target.value)} 
           placeholder="Please, feel free to share any additional comments you might have."

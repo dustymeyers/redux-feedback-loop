@@ -16,7 +16,10 @@ import { Provider } from 'react-redux';
 const feedback = (state = {}, action) => {
   // Action from the first form - Feeling Submission
   if(action.type === 'SET_FEELING_RATING') {
-    return action.payload; 
+    return {
+      ...state, 
+      [action.payload.property]: action.payload.value
+    }; 
   }
 
   /**

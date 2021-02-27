@@ -16,7 +16,7 @@ function UnderstandingRating() {
   // local state for input
   const [understanding, setUnderstanding] = useState('');
   
-  // on FeelingRating form submission validate and dispatch appropriate data
+  // on form submission validate and dispatch appropriate data
   const handleSubmit = (event) => {
     event.preventDefault();
 

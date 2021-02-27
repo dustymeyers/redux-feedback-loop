@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
+import './Home.css';
 
 function Home () {
 
   return(
     <>
-      <h2>Let us know you're feeling this week!</h2>
+      <h2>Let us know how you're feeling this week!</h2>
       <h4>Submit your feedback</h4>
-      <div class="button">
+      <div className="button">
         <Link to="/question1">Give Feedback</Link>
       </div>
       

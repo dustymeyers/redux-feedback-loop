@@ -1,0 +1,27 @@
+/* Used to style a <div> button Link for accessability */
+.button {
+  display: inline-block;
+  color: #444;
+  border: 1px solid #CCC;
+  background: #DDD;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+  cursor: pointer;
+  vertical-align: middle;
+  max-width: 100px;
+  padding: 5px;
+  text-align: center;
+}
+
+/* Forcing anchor element into an inline-block element so 
+  the whole "div" button is clickable and not just the text*/
+.button a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* On click, box-shadow becomes darker and text color changes */
+.button:active {
+  color:red;
+  box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+

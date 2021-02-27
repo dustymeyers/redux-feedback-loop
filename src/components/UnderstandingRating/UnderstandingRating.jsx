@@ -23,7 +23,7 @@ function UnderstandingRating() {
     console.log('in handleSubmit, understanding is: ', understanding);
 
     // validate data on form submission
-    if (understanding === ''){
+    if (understanding === '') {
       return alert('Please enter a number between 1 and 5 before submission.')
     }
     

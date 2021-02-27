@@ -23,7 +23,7 @@ function SupportRating() {
     console.log('in handleSubmit, understanding is: ', support);
 
     // validate data on form submission
-    if (support === ''){
+    if (support === '') {
       return alert('Please enter a number between 1 and 5 before submission.')
     }
     

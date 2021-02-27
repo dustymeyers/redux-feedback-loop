@@ -23,7 +23,7 @@ function AdditionalComments(){
     console.log('in handleSubmit, understanding is: ', comments);
 
     // validate data on form submission
-    if (comments === ''){
+    if (comments === '') {
       return alert('Please enter a number between 1 and 5 before submission.')
     }
     

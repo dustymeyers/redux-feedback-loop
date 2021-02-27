@@ -15,6 +15,13 @@ function FeelingRating(){
 
   // local state for input
   const [feeling, setFeeling] = useState('');
+
+  // go back to previous page
+  const handleBack = (event) => {
+    event.preventDefault();
+
+    history.push('/');
+  }
   
   // on FeelingRating form submission validate and dispatch appropriate data
   const handleSubmit = (event) => {
@@ -23,7 +30,7 @@ function FeelingRating(){
     console.log('in handleSubmit, feeling is: ', feeling);
 
     // validate data on form submission
-    if (feeling === ''){
+    if (feeling === '') {
       return alert('Please enter a number between 1 and 5 before submission.')
     }
     
@@ -44,6 +51,7 @@ function FeelingRating(){
     <>
       <h2>How are you feeling today?</h2>
       <form onSubmit={handleSubmit}>
+      <button onClick={handleBack}>Back</button>
         <input 
           // forces the input value from string to number from submission
           onChange={event => setFeeling(Number(event.target.value))} 

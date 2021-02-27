@@ -53,6 +53,7 @@ function FeelingRating(){
           max="5" 
           value={feeling}
         />
+        {/* TODO - Make accessible-friendly button */}
         <button>Next</button>
       </form>
     </>

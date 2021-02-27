@@ -42,7 +42,7 @@ function UnderstandingRating() {
 
   return(
     <>
-      <h2>How well are you understanding the content? </h2>
+      <h2>How well are you understanding the content?</h2>
       <form onSubmit={handleSubmit}>
         <input 
           // forces the input value from string to number from submission
@@ -53,7 +53,7 @@ function UnderstandingRating() {
           max="5" 
           value={understanding}
         />
-        {/* TODO - history.push to UnderstandingRating */}
+        {/* TODO - Make accessible-friendly button */}
         <button>Next</button>
       </form>
     </>

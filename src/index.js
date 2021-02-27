@@ -75,6 +75,11 @@ const feedback = (state = {}, action) => {
      * }
      */
   }
+
+  // Action when sent back to home page - resets feedback state
+  if(action.type === 'CLEAR_FEEDBACK') {
+    return {};
+  }
   
   return state;
 }

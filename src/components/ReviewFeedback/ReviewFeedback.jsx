@@ -12,13 +12,6 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
     console.log('in submitFeedback');
     console.log(feedback.feeling);
 
-    // const feedbackToSend = {
-    //   feeling: feedback.feeling,
-    //   understanding: feedback.understanding,
-    //   support: feedback.support,
-    //   comments: feedback.comments
-    // }
-
     // axios POST to DB
     axios.post('/api/feedback', feedback)
       .then(res => {
@@ -26,18 +19,15 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
 
         // set a boolean value to render conditional thanks on home screen
         setIsFeedbackSubmitted(true);
-
-         // dispatch to clear state
-        // routeToHome();
       })
       .catch(err => {
         console.log('There was an error adding feedback', err);
 
         alert('There was an error adding your feedback. Please, try again.');
-        
-        // dispatch to clear state and start over
-        // routeToHome();
       })
+
+      // dispatch to clear state and start over
+      routeToHome();
     } // end submitFeedback
 
   // resets the feedback reducer to original state (pre-form input)

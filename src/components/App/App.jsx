@@ -5,6 +5,7 @@ import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom'
 
 // Components (User "views")
 import FeelingRating from '../FeelingRating/FeelingRating';
+import Home from '../Home/Home';
 import UnderstandingRating from '../UnderstandingRating/UnderstandingRating';
 
 
@@ -20,15 +21,21 @@ function App() {
 
       <Router>
 
+        {/* Home, Welcome Greeting */}
+        {/* Invites the user to engage with survey */}
+        <Route path="/" exact>
+          <Home />
+        </Route>
+
         {/* 1st view, Input Feeling Rating */}
         {/* How are you feeling today? */}
-        <Route path="/" exact>
+        <Route path="/question1">
           <FeelingRating />
         </Route>
 
         {/* 2nd view, Input Understand Rating */}
         {/* How well are you understanding the content? */}
-        <Route path="/2">
+        <Route path="/question2">
           <UnderstandingRating />
         </Route>
 

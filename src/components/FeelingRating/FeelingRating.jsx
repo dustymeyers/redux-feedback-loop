@@ -36,7 +36,7 @@ function FeelingRating(){
     setFeeling('');
 
     // move user to the next page 
-    history.push('/2');
+    history.push('/question2');
   }
 
   return(

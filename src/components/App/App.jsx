@@ -4,6 +4,7 @@ import './App.css';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
 
 // Components (User "views")
+import AdditionalComments from '../AdditionalComments/AdditionalComments';
 import FeelingRating from '../FeelingRating/FeelingRating';
 import Home from '../Home/Home';
 import SupportRating from '../SupportRating/SupportRating';
@@ -48,6 +49,12 @@ function App() {
 
         {/* 4th view, Input Additional Comments */}
         {/* Any comments you want to leave? */}
+        <Route path="/question4">
+          <AdditionalComments />
+        </Route>
+
+        {/* 5th view, Review Feedback Before Submission to DB */}
+
       </Router>
 
     </div>

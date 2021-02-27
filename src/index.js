@@ -21,6 +21,12 @@ const feedback = (state = {}, action) => {
       [action.payload.property]: action.payload.value
     };
   }
+  if(action.type === 'SET_SUPPORT_RATING') {
+    return {
+      ...state, 
+      [action.payload.property]: action.payload.value
+    };
+  }
 
   return state;
 }

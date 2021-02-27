@@ -29,7 +29,7 @@ function SupportRating() {
     
     // if there is data, send local state to be stored in reducer
     dispatch({
-      type: 'SET_UNDERSTANDING_RATING',
+      type: 'SET_SUPPORT_RATING',
       payload: { property: 'support', value: support }
     })
 

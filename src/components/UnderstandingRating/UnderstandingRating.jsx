@@ -20,7 +20,8 @@ function UnderstandingRating() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log('in handleSubmit, feeling is: ', understanding);
+    console.log('in handleSubmit, understanding is: ', understanding);
+
     // validate data on form submission
     if (understanding === ''){
       return alert('Please enter a number between 1 and 5 before submission.')
@@ -28,8 +29,8 @@ function UnderstandingRating() {
     
     // if there is data, send local state to be stored in reducer
     dispatch({
-      type: 'ADD_UNDERSTANDING_RATING',
-      payload: { feeling: understanding }
+      type: 'SET_UNDERSTANDING_RATING',
+      payload: { property: 'understanding', value: understanding }
     })
 
     // reset local state on submission

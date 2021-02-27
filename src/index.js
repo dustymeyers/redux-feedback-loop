@@ -12,8 +12,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
 const feedback = (state = {}, action) => {
-  if(action.type === 'ADD_FEELING_RATING') {
+  if(action.type === 'SET_FEELING_RATING') {
     return action.payload;
+  }
+  if(action.type === 'SET_UNDERSTANDING_RATING') {
+    return {
+      ...state, 
+      [action.payload.property]: action.payload.value
+    };
   }
 
   return state;

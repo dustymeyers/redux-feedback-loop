@@ -17,7 +17,7 @@ function App() {
   // Local state used for conditional rendering on Home page
   // On submission from ReviewFeedback, boolean is set to true
   // When the begin feedback submission button is clicked on home, boolean is set to false
-  const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState(true);
+  const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState(false);
 
   return (
     <div className='App'>

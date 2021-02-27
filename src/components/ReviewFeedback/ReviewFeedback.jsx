@@ -1,24 +1,32 @@
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   const history = useHistory();
   const dispatch = useDispatch();
-
   const feedback = useSelector(store => store.feedback);
 
   const submitFeedback = () => {
-    console.log('in submitFeedback');
+    console.log('in submitFeedback', feedback.feeling);
 
-    // validate that the submission fields are not 
     // axios POST to DB
+    axios.post('/api/feedback', feedback)
+      .then(res => {
+        console.log(`Server response after submission:`, res);
 
-    // set a boolean value to render conditional thanks on home screen
-    setIsFeedbackSubmitted(true);
+        // set a boolean value to render conditional thanks on home screen
+        setIsFeedbackSubmitted(true);
+      })
+      .catch(err => {
+        console.log('There was an error adding feedback', err);
 
-    // dispatch to clear state
-    routeToHome();
-  }
+        alert('There was an error adding your feedback. Please, try again.');
+      })
+
+      // dispatch to clear state and start over
+      routeToHome();
+    } // end submitFeedback
 
   // resets the feedback reducer to original state (pre-form input)
   const routeToHome = () => {

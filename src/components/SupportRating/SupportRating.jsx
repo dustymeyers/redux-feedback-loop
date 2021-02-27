@@ -38,8 +38,7 @@ function SupportRating() {
 
     // move user to the next page 
     history.push('/question4');
-  }
-
+  } // end handleSubmit
 
   return(
     <>
@@ -59,6 +58,6 @@ function SupportRating() {
       </form>
     </>
   );
-}
+} // end SupportRating
 
 export default SupportRating;

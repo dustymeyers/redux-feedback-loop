@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
     .catch(err => {
       console.log('There was an error:', err);
       res.sendStatus(500);
-    })
-})
+    });
+}) // End router.post /api/feedback
 
 module.exports = router;

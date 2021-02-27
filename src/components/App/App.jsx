@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
@@ -14,9 +14,15 @@ import UnderstandingRating from '../UnderstandingRating/UnderstandingRating';
 
 function App() {
 
+  // Local state used for conditional rendering on Home page
+  // On submission from ReviewFeedback, boolean is set to true
+  // When the begin feedback submission button is clicked on home, boolean is set to false
+  const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState(true);
+
   return (
     <div className='App'>
 
+      
       <header className='App-header'>
         <h1 className='App-title'>Feedback!</h1>
         <h4>Don't forget it!</h4>
@@ -27,7 +33,10 @@ function App() {
         {/* Home, Welcome Greeting */}
         {/* Invites the user to engage with survey */}
         <Route path="/" exact>
-          <Home />
+          <Home 
+            isFeedbackSubmitted={isFeedbackSubmitted} 
+            setIsFeedbackSubmitted={setIsFeedbackSubmitted} 
+          />
         </Route>
 
         {/* 1st view, Input Feeling Rating */}
@@ -57,7 +66,7 @@ function App() {
         {/* 5th view, Review Feedback Before Submission to DB */}
         {/* Review your feedback before submission. */}
         <Route path="/reviewFeedback">
-          <ReviewFeedback />
+          <ReviewFeedback setIsFeedbackSubmitted={setIsFeedbackSubmitted} />
         </Route>
 
       </Router>

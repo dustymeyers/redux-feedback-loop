@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function ReviewFeedback() {
+function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -9,12 +9,12 @@ function ReviewFeedback() {
 
   const submitFeedback = () => {
     console.log('in submitFeedback');
+
     // validate that the submission fields are not 
     // axios POST to DB
 
-    
-
     // set a boolean value to render conditional thanks on home screen
+    setIsFeedbackSubmitted(true);
 
     // dispatch to clear state
     routeToHome();
@@ -22,7 +22,9 @@ function ReviewFeedback() {
 
   // resets the feedback reducer to original state (pre-form input)
   const routeToHome = () => {
+    // clear our feedback reducer
     dispatch({ type: 'CLEAR_FEEDBACK' });
+    // send user back to the Home page
     history.push('/');
   };
 
@@ -40,7 +42,7 @@ function ReviewFeedback() {
             <h4>Comments: {feedback.comments}</h4>
             <button onClick={submitFeedback}>Submit</button>
           </>
-        ) : routeToHome} 
+        ) : routeToHome()} 
     </>
   );  
 } // end ReviewFeedback

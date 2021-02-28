@@ -7,13 +7,15 @@ function Admin() {
 
   const deleteFeedback = (feedbackId) => {
     console.log('delete clicked on', feedbackId);
+    
+    // make axios delete request
+    
   }
   
 
   return(
     <>
       <h2>Feedback Results!</h2>
-
       <table>
         <thead>
           <tr>
@@ -25,6 +27,7 @@ function Admin() {
           </tr>
         </thead>
         <tbody>
+          {/* Loops through feedbackList rendering a <tr> for each feedback item in DB, ordered by date */}
           {feedbackList.map((feedback, index) => {
             return(
               <tr key={index}>
@@ -36,20 +39,6 @@ function Admin() {
               </tr>
             );
           })}
-          <tr>
-            <td>4</td>
-            <td>4</td>
-            <td>5</td>
-            <td>"Loved the Demos!"</td>
-            <td><button>delete</button></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>4</td>
-            <td>"I don't get it!"</td>
-            <td><button>delete</button></td>
-          </tr>
         </tbody>
       </table>
     </>

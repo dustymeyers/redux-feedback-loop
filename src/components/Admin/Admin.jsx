@@ -73,6 +73,17 @@ function Admin() {
       .catch(err => console.log('There was an error getting data:', err))
   }
 
+  // used to format dateString from DB into a legible one
+  // Found this code for use from Sarah Drasner, Updated May 26, 2020
+  // https://css-tricks.com/how-to-convert-a-date-string-into-a-human-readable-format/
+  const formatDate = (dateString) => {
+    // represents how the date data should be formatted
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    // returns a new date instance, platform-independent
+    // undefined used to set time locally
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
   return(
     <>
       <h2>Feedback Results!</h2>
@@ -84,13 +95,14 @@ function Admin() {
             <th>Comprehension</th>
             <th>Support</th>
             <th>Comments</th>
+            <th>Date Added</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {/* Loops through feedbackList rendering a <tr> for each feedback item in DB, ordered by date */}
           {feedbackList.map((feedback, index) => {
-            console.log(feedback.flagged);
+            // console.log(typeof feedback.date);
             return(
               <tr key={index}>
                 <td>
@@ -103,6 +115,7 @@ function Admin() {
                 <td>{feedback.understanding}</td>
                 <td>{feedback.support}</td>
                 <td>{feedback.comments}</td>
+                <td>{formatDate(feedback.date)}</td>
                 <td><button onClick={() => deleteFeedback(feedback.id)}>Delete</button></td>
               </tr>
             );

@@ -16,7 +16,9 @@ function Home ({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   
   /**
    * Home page set to render thank you message if isFeedbackSubmitted is true.
-   * On successful feedback submission in ReviewFeedback.jsx, isFeedbackSubmitted will be set to true.
+   * On successful feedback submission from ReviewFeedback.jsx ('/reviewFeedback'), 
+   * isFeedbackSubmitted will be set to true.
+   * 
    * True - Renders "Thanks for submit." message and "Give New Feedback" button.
    * False - Default state  set to render without thank you and button renders "Give Feedback".
    */
@@ -24,7 +26,7 @@ function Home ({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   if (isFeedbackSubmitted === true) {
     homeMessage = (
       <h3 className="successMessage">
-        Thanks for your submission! Would you like to submit your feedback again?
+        Thanks for your submission! Would you like to submit new feedback?
       </h3>
     );
 

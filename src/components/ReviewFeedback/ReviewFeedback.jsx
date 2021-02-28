@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   const history = useHistory();
   const dispatch = useDispatch();
+  // feedback reducer
   const feedback = useSelector(store => store.feedback);
 
   
@@ -20,7 +21,7 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   // Submits feedback scores/comments stored in feedback reducer
   // Axios post sends data to DB
   const submitFeedback = () => {
-    console.log('in submitFeedback', feedback.feeling);
+    console.log('in submitFeedback', feedback);
 
     // axios POST to DB
     axios.post('/api/feedback', feedback)
@@ -31,7 +32,7 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
         setIsFeedbackSubmitted(true);
       })
       .catch(err => {
-        console.log('There was an error adding feedback', err);
+        console.log('There was an error adding feedback:', err);
 
         alert('There was an error adding your feedback. Please, try again.');
       })

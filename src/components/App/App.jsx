@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
@@ -14,11 +14,31 @@ import UnderstandingRating from '../UnderstandingRating/UnderstandingRating';
 
 
 function App() {
-
   // Local state used for conditional rendering on Home page
   // On submission from ReviewFeedback, boolean is set to true
-  // When the begin feedback submission button is clicked on home, boolean is set to false
+  // When the "give feedback" button is clicked on home, boolean is set to false
   const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState(false);
+
+  // on load of admin page, call server
+  useEffect(() => {
+    console.log();
+    getFeedback();
+  }, []);
+
+  // Takes all saved feedback data from DB stores in feedbackList reducer
+  // Axios get sends data to DB
+  const getFeedback = () => {
+    console.log('in getFeedback');
+    
+    // axios GET from DB
+    axios.get('/api/feedback')
+      .then(res => {
+        console.log('GET /api/feedback sent back rows:', res.data);
+
+        // set that data to a reducer state
+      })
+      .catch(err => console.log('There was an error getting data:', err))
+  }
 
   return (
     <div className='App'>

@@ -11,14 +11,30 @@ function Admin() {
     getFeedback();
   }, []);
 
-  const changeFlag = (boolean) => {
+  // Sends feedback.id assigned to button as well as the opposite of current boolean value
+  // Axios PUT sends data to DB
+  const changeFlag = (boolean, feedbackId) => {
     console.log('Flag button clicked, currently set to:', boolean);
     console.log('opposite:', !boolean);
+    console.log('id is:', feedbackId);
 
+    // make axios put request at id endpoint
+    axios.put(`/api/feedback/${feedbackId}`, { flagged: !boolean })
+      .then( res => {
+        console.log(`Server response after submission: `, res);
+
+        // render new page with updated values.
+        getFeedback();
+      })
+      .catch(err => {
+        console.log('There was an error updating flag: ', err);
+
+        alert('There was an error updating the flagged feedback. Please, try again.');
+      })
     
   }
 
-  // Used in line 70. Sends feedback.id assigned to button for deletion
+  // Sends feedback.id assigned to button for deletion
   // Axios Delete sends unique Id to DB
   const deleteFeedback = (feedbackId) => {
     console.log('delete clicked on', feedbackId);
@@ -31,7 +47,11 @@ function Admin() {
         // reset redux state to update displayed table
         getFeedback();
       })
-      .catch(err => console.log('There was an error deleting:', err))
+      .catch(err => { 
+        console.log('There was an error deleting:', err);
+
+        alert('There was an error deleting feedback. Please, try again.');
+      })
   }
 
   // Takes all saved feedback data from DB stores in feedbackList reducer
@@ -75,8 +95,8 @@ function Admin() {
               <tr key={index}>
                 <td>
                   {feedback.flagged 
-                    ? <button onClick={() => changeFlag(feedback.flagged)}>Flagged</button> 
-                    : <button onClick={() => changeFlag(feedback.flagged)}>Not Flagged</button> 
+                    ? <button onClick={() => changeFlag(feedback.flagged, feedback.id)}>Flagged</button> 
+                    : <button onClick={() => changeFlag(feedback.flagged, feedback.id)}>Not Flagged</button> 
                   }
                 </td>
                 <td>{feedback.feeling}</td>

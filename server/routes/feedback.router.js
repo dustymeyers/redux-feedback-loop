@@ -38,11 +38,11 @@ router.get('/', (req, res) => {
    * Query to DB should look like:
    * 
    * SELECT * FROM "feedback" 
-   * ORDER BY "date" ASC;
+   * ORDER BY "id" ASC;
    */
 
   // SQL query to send to DB
-  const queryText = 'SELECT * FROM "feedback" ORDER BY "date" ASC;';
+  const queryText = 'SELECT * FROM "feedback" ORDER BY "id" ASC;';
 
   // pg query the DB w/ our queryText 
   pool.query(queryText)
@@ -119,14 +119,16 @@ router.put('/:id', (req, res) => {
   // SQL query to send to DB
   const queryText = 'UPDATE "feedback" SET "flagged" = $1 WHERE "id" = $2;';
 
+  // console.log('id', feedbackId);
+  // console.log('boolean to set', flagBoolean);
+
   // packages up the id and the new boolean value to change in DB
   let queryArg = [
     flagBoolean,  // $1
     feedbackId   // $2
   ];
 
-  console.log('id', feedbackId);
-  console.log('boolean to set', flagBoolean);
+ 
   // pg query the DB w/ our queryText
   pool.query(queryText, queryArg)
   // On success, send back 200 - Okay

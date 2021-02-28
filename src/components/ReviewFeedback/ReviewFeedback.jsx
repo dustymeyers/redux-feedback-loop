@@ -68,7 +68,11 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
             <h4 onClick={() => history.push('/question4')}>
               Comments: {feedback.comments ? feedback.comments : 'No comments were given.'}
             </h4>
-            <Button onClick={submitFeedback}>
+            <Button 
+              variant="contained"
+              color="primary"
+              onClick={submitFeedback}
+            >
               Submit
             </Button>
             <p>Feel free to click on a feedback score or the comments to edit them.</p>

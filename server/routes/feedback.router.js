@@ -28,7 +28,7 @@ router.delete('/:id', (req, res) => {
       console.log('There was an error:', err)
       res.sendStatus(500);
     });
-})
+}) // end router.delete /api/feedback/:id
 
 // GET Route - /api/feedback
 router.get('/', (req, res) => {
@@ -98,5 +98,12 @@ router.post('/', (req, res) => {
       res.sendStatus(500);
     });
 }) // End router.post /api/feedback
+
+// PUT Route - /api/feedback/:id
+router.put('/:id', (req, res) => {
+  
+  let feedbackId = req.params.id
+
+}) // End router.put / api/feedback/:id
 
 module.exports = router;

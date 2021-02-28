@@ -11,6 +11,15 @@ function Admin() {
     getFeedback();
   }, []);
 
+  const changeFlag = (boolean) => {
+    console.log('Flag button clicked, currently set to:', boolean);
+    console.log('opposite:', !boolean);
+
+    
+  }
+
+  // Used in line 70. Sends feedback.id assigned to button for deletion
+  // Axios Delete sends unique Id to DB
   const deleteFeedback = (feedbackId) => {
     console.log('delete clicked on', feedbackId);
     
@@ -50,6 +59,7 @@ function Admin() {
       <table>
         <thead>
           <tr>
+            <th>Flag</th>
             <th>Feeling</th>
             <th>Comprehension</th>
             <th>Support</th>
@@ -60,8 +70,15 @@ function Admin() {
         <tbody>
           {/* Loops through feedbackList rendering a <tr> for each feedback item in DB, ordered by date */}
           {feedbackList.map((feedback, index) => {
+            console.log(feedback.flagged);
             return(
               <tr key={index}>
+                <td>
+                  {feedback.flagged 
+                    ? <button onClick={() => changeFlag(feedback.flagged)}>Flagged</button> 
+                    : <button onClick={() => changeFlag(feedback.flagged)}>Not Flagged</button> 
+                  }
+                </td>
                 <td>{feedback.feeling}</td>
                 <td>{feedback.understanding}</td>
                 <td>{feedback.support}</td>

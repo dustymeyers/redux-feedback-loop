@@ -3,6 +3,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Admin.css';
 
+// MATERIAL-UI
+import { Button } from '@material-ui/core';
+
 function Admin() {
   const dispatch = useDispatch();
   const feedbackList = useSelector(store => store.feedbackList);
@@ -112,8 +115,20 @@ function Admin() {
                 <td>
                   {/* changes the button depends on the boolean value of feedback.flagged, allows the user to change that value */}
                   {feedback.flagged 
-                    ? <button onClick={() => changeFlag(feedback.flagged, feedback.id)}>Remove Flag</button> 
-                    : <button onClick={() => changeFlag(feedback.flagged, feedback.id)}>Flag</button> 
+                    ? <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => changeFlag(feedback.flagged, feedback.id)}
+                      >
+                        Remove Flag
+                      </Button>
+                    : <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => changeFlag(feedback.flagged, feedback.id)}
+                      >
+                        Flag
+                      </Button> 
                   }
                 </td>
                 
@@ -129,7 +144,15 @@ function Admin() {
                 <td>{formatDate(feedback.date)}</td>
 
                 {/* Creates a button to delete the specific row item */}
-                <td><button onClick={() => deleteFeedback(feedback.id)}>Delete</button></td>
+                <td>
+                  <Button 
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => deleteFeedback(feedback.id)}
+                  >
+                    Delete
+                  </Button>
+                </td>
               </tr>
             );
           })}

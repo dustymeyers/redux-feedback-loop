@@ -2,6 +2,9 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+// MATERIAL-UI
+import { Button } from '@material-ui/core';
+
 function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -65,9 +68,10 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
             <h4 onClick={() => history.push('/question4')}>
               Comments: {feedback.comments ? feedback.comments : 'No comments were given.'}
             </h4>
-            
-            <button onClick={submitFeedback}>Submit</button>
-            <p>Feel free to click on a feedback score to edit it.</p>
+            <Button onClick={submitFeedback}>
+              Submit
+            </Button>
+            <p>Feel free to click on a feedback score or the comments to edit them.</p>
           </>
         ) : routeToHome()} 
     </>

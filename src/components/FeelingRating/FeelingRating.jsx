@@ -81,6 +81,7 @@ function FeelingRating(){
           min="1"
           max="5"
           value={feeling}
+          // forces the input value from string to number from submission
           onChange={event => setFeeling(Number(event.target.value))} 
         />
         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">

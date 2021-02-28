@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 // MATERIAL-UI
-import { Button, ButtonGroup } from '@material-ui/core';
+import { Button, ButtonGroup, TextField } from '@material-ui/core';
 
 /**
  * UnderstandingRating Renders the Second Form View for Feedback
@@ -70,14 +70,17 @@ function UnderstandingRating() {
     <>
       <h2>How well are you understanding the content?</h2>
       <form onSubmit={handleSubmit}>
-        <input 
+        <TextField 
+          type="number" 
+          id="filled-basic" 
+          label="How are you feeling?" 
+          variant="filled" 
+          placeholder="1 - 5" 
+          min="1"
+          max="5"
+          value={understanding}
           // forces the input value from string to number from submission
           onChange={event => setUnderstanding(Number(event.target.value))} 
-          type="number" 
-          placeholder="1 - 5" 
-          min="1" 
-          max="5" 
-          value={understanding}
         />
         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
           <Button onClick={handleBack}>Back</Button>

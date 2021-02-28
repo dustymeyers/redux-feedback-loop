@@ -48,21 +48,25 @@ function FeelingRating(){
 
     // validate data on form submission
     if (feeling === '') {
-      return alert('Please enter a number between 1 and 5 before submission.')
-    }
-    
-    // if there is data, send local state to be stored in reducer
-    dispatch({
-      type: 'SET_FEELING_RATING',
-      payload: { property: 'feeling', value: feeling }
-    })
+      return alert('Please enter a number between 1 and 5 before submission.');
+    } else if (feeling > 5 || feeling < 1)     {
+      return alert('Please enter a number between 1 and 5 before submission.');
+    } else {
+      // if there is data, send local state to be stored in reducer
+      dispatch({
+        type: 'SET_FEELING_RATING',
+        payload: { property: 'feeling', value: feeling }
+      })
 
-    // reset local state on submission
-    setFeeling('');
+      // reset local state on submission
+      setFeeling('');
 
-    // move user to the next page 
-    history.push('/question2');
+      // move user to the next page 
+      history.push('/question2');
+    } // end else
   } // end handleSubmit
+    
+
 
   return(
     <>

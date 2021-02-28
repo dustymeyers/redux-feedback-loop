@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+// MATERIAL-UI
+import { Button, ButtonGroup } from '@material-ui/core';
+
 /**
  * UnderstandingRating Renders the Second Form View for Feedback
  * "/question2"
@@ -45,38 +48,41 @@ function UnderstandingRating() {
 
     // validate data on form submission
     if (understanding === '') {
-      return alert('Please enter a number between 1 and 5 before submission.')
-    }
-    
-    // if there is data, send local state to be stored in reducer
-    dispatch({
-      type: 'SET_UNDERSTANDING_RATING',
-      payload: { property: 'understanding', value: understanding }
-    })
+      return alert('Please enter a number between 1 and 5 before submission.');
+    } else if (understanding > 5 || understanding < 1)     {
+      return alert('Please enter a number between 1 and 5 before submission.');
+    } else {
+      // if there is data, send local state to be stored in reducer
+      dispatch({
+        type: 'SET_UNDERSTANDING_RATING',
+        payload: { property: 'understanding', value: understanding }
+      })
 
-    // reset local state on submission
-    setUnderstanding('');
+      // reset local state on submission
+      setUnderstanding('');
 
-    // move user to the next page 
-    history.push('/question3');
+      // move user to the next page 
+      history.push('/question3');
+    } // end else
   } // end handleSubmit
 
   return(
     <>
       <h2>How well are you understanding the content?</h2>
       <form onSubmit={handleSubmit}>
-        <button onClick={handleBack}>Back</button>
         <input 
           // forces the input value from string to number from submission
           onChange={event => setUnderstanding(Number(event.target.value))} 
           type="number" 
           placeholder="1 - 5" 
-          min = "1" 
+          min="1" 
           max="5" 
           value={understanding}
         />
-        {/* TODO - Make accessible-friendly button */}
-        <button>Next</button>
+        <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+          <Button onClick={handleBack}>Back</Button>
+          <Button onClick={handleSubmit}>Next</Button>
+        </ButtonGroup>
       </form>
     </>
   );

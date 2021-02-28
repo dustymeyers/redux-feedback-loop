@@ -77,7 +77,7 @@ function FeelingRating(){
           onChange={event => setFeeling(Number(event.target.value))} 
           type="number" 
           placeholder="1-5" 
-          min = "1" 
+          min="1" 
           max="5" 
           value={feeling}
         />

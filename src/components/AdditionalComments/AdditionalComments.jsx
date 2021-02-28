@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+// MATERIAL-UI
+import { Button, ButtonGroup } from '@material-ui/core';
+
 /**
  * AdditionalComments Renders the Fourth Form View for Feedback
  * "/question4"
@@ -60,7 +63,6 @@ function AdditionalComments(){
     <>
       <h2>How well are you understanding the content?</h2>
       <form onSubmit={handleSubmit}>
-        <button onClick={handleBack}>Back</button>
         <textarea
           onChange={event => setComments(event.target.value)} 
           placeholder="Please, feel free to share any additional comments you might have."
@@ -68,8 +70,10 @@ function AdditionalComments(){
           rows="4" 
           cols="50"
         ></textarea>
-        {/* TODO - Make accessible-friendly button */}
-        <button>Next</button>
+        <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+          <Button onClick={handleBack}>Back</Button>
+          <Button onClick={handleSubmit}>Next</Button>
+        </ButtonGroup>
       </form>
     </>
   );

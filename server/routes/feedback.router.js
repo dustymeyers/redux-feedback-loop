@@ -2,6 +2,59 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
+// DELETE Route - /api/feedback/:id
+router.delete('/:id', (req, res) => {
+  console.log('DELETE /api/feedback with id:', req.params.id);
+
+  // feedback id
+  let feedbackId = req.params.id;
+
+  /**
+   * Query to DB should look like:
+   * 
+   * DELETE FROM "feedback"
+   * WHERE "id" = 4;
+   */
+
+  // SQL query to send to DB
+  let queryText = 'DELETE FROM "feedback" WHERE "id" = $1;'
+
+  // pg query the DB w/ our queryText 
+  pool.query(queryText, [feedbackId])
+    // On success, send back 200 - Okay
+    .then(dbRes => res.sendStatus(200))
+    // On failure, send back 500 - Internal Error 
+    .catch(err => {
+      console.log('There was an error:', err)
+      res.sendStatus(500);
+    });
+})
+
+// GET Route - /api/feedback
+router.get('/', (req, res) => {
+  console.log('GET /api/feedback');
+
+  /**
+   * Query to DB should look like:
+   * 
+   * SELECT * FROM "feedback" 
+   * ORDER BY "date" ASC;
+   */
+
+  // SQL query to send to DB
+  let queryText = 'SELECT * FROM "feedback" ORDER BY "date" ASC;';
+
+  // pg query the DB w/ our queryText 
+  pool.query(queryText)
+    // On success, send back 200 - Okay
+    .then(dbRes => res.send(dbRes.rows))
+    // On failure, send back 500 - Internal Error 
+    .catch(err => {
+      console.log('There was an error:', err)
+      res.sendStatus(500);
+    });
+}) // end router.get /api/feedback
+
 // POST Route - /api/feedback
 // send user feedback to server
 router.post('/', (req, res) => {
@@ -27,7 +80,7 @@ router.post('/', (req, res) => {
       ($1, $2, $3, $4);
   `;
 
-   // packaging up user feedback data for 2nd query argument
+  // packaging up user feedback data for 2nd query argument
   let queryArg= [
     feedback.feeling,       // $1
     feedback.understanding, // $2
@@ -39,7 +92,7 @@ router.post('/', (req, res) => {
   pool.query(queryText, queryArg)
     // On success, send back 201 - Created
     .then(dbRes => res.sendStatus(201))
-    // On failure, send back error
+    // On failure, send back 500 - Internal Error 
     .catch(err => {
       console.log('There was an error:', err);
       res.sendStatus(500);

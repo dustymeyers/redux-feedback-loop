@@ -5,7 +5,10 @@ import { useHistory } from 'react-router-dom';
 function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   const history = useHistory();
   const dispatch = useDispatch();
+  // feedback reducer
   const feedback = useSelector(store => store.feedback);
+
+  
 
   // resets the feedback reducer to original state (pre-form input)
   const routeToHome = () => {
@@ -18,7 +21,7 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   // Submits feedback scores/comments stored in feedback reducer
   // Axios post sends data to DB
   const submitFeedback = () => {
-    console.log('in submitFeedback', feedback.feeling);
+    console.log('in submitFeedback', feedback);
 
     // axios POST to DB
     axios.post('/api/feedback', feedback)
@@ -29,7 +32,7 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
         setIsFeedbackSubmitted(true);
       })
       .catch(err => {
-        console.log('There was an error adding feedback', err);
+        console.log('There was an error adding feedback:', err);
 
         alert('There was an error adding your feedback. Please, try again.');
       })
@@ -46,10 +49,23 @@ function ReviewFeedback({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
       ? (
           <>
             <h2>Review Your Feedback</h2>
-            <h4 onClick={() => history.push('/question1')}>Feeling: {feedback.feeling} </h4>
-            <h4 onClick={() => history.push('/question2')}>Understanding: {feedback.understanding}</h4>
-            <h4 onClick={() => history.push('/question3')}>Support: {feedback.support}</h4>
-            <h4 onClick={() => history.push('/question4')}>Comments: {feedback.comments}</h4>
+
+            <h4 onClick={() => history.push('/question1')}>
+                Feeling: {feedback.feeling} 
+            </h4>
+
+            <h4 onClick={() => history.push('/question2')}>
+              Understanding: {feedback.understanding}
+            </h4>
+
+            <h4 onClick={() => history.push('/question3')}>
+              Support: {feedback.support}
+            </h4>
+
+            <h4 onClick={() => history.push('/question4')}>
+              Comments: {feedback.comments ? feedback.comments : 'No comments were given.'}
+            </h4>
+            
             <button onClick={submitFeedback}>Submit</button>
             <p>Feel free to click on a feedback score to edit it.</p>
           </>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import './Admin.css';
 
 function Admin() {
   const dispatch = useDispatch();
@@ -30,9 +31,8 @@ function Admin() {
         console.log('There was an error updating flag: ', err);
 
         alert('There was an error updating the flagged feedback. Please, try again.');
-      })
-    
-  }
+      });
+  } // end changeFlag
 
   // Sends feedback.id assigned to button for deletion
   // Axios Delete sends unique Id to DB
@@ -52,7 +52,7 @@ function Admin() {
 
         alert('There was an error deleting feedback. Please, try again.');
       })
-  }
+  } // end deleteFeedback
 
   // Takes all saved feedback data from DB stores in feedbackList reducer
   // Axios get sends data to DB
@@ -71,7 +71,7 @@ function Admin() {
         })
       })
       .catch(err => console.log('There was an error getting data:', err))
-  }
+  } // end getFeedback
 
   // used to format dateString from DB into a legible one
   // Found this code for use from Sarah Drasner, Updated May 26, 2020
@@ -79,10 +79,11 @@ function Admin() {
   const formatDate = (dateString) => {
     // represents how the date data should be formatted
     const options = { year: "numeric", month: "long", day: "numeric" };
+
     // returns a new date instance, platform-independent
     // undefined used to set time locally
     return new Date(dateString).toLocaleDateString(undefined, options);
-  }
+  } // end formatDate
 
   return(
     <>
@@ -100,22 +101,34 @@ function Admin() {
           </tr>
         </thead>
         <tbody>
+
           {/* Loops through feedbackList rendering a <tr> for each feedback item in DB, ordered by date */}
           {feedbackList.map((feedback, index) => {
             // console.log(typeof feedback.date);
             return(
-              <tr key={index}>
+              // changes the class of <tr> depending on the boolean value of feedback.flagged, appears red on false
+              <tr className={feedback.flagged ? 'flaggedFeedback' : 'notFlaggedFeedback'} key={index}>
+                
                 <td>
+                  {/* changes the button depends on the boolean value of feedback.flagged, allows the user to change that value */}
                   {feedback.flagged 
-                    ? <button onClick={() => changeFlag(feedback.flagged, feedback.id)}>Flagged</button> 
-                    : <button onClick={() => changeFlag(feedback.flagged, feedback.id)}>Not Flagged</button> 
+                    ? <button onClick={() => changeFlag(feedback.flagged, feedback.id)}>Remove Flag</button> 
+                    : <button onClick={() => changeFlag(feedback.flagged, feedback.id)}>Flag</button> 
                   }
                 </td>
+                
+                {/* Scores representing "feeling", "understanding", and "support". */}
                 <td>{feedback.feeling}</td>
                 <td>{feedback.understanding}</td>
                 <td>{feedback.support}</td>
-                <td>{feedback.comments}</td>
+
+                {/* If comments were left blank, gives a note to let the user know, otherwise renders comments */}
+                <td>{feedback.comments === '' ? 'No comments were given.' : feedback.comments}</td>
+
+                {/* Formats the date for readability */}
                 <td>{formatDate(feedback.date)}</td>
+
+                {/* Creates a button to delete the specific row item */}
                 <td><button onClick={() => deleteFeedback(feedback.id)}>Delete</button></td>
               </tr>
             );

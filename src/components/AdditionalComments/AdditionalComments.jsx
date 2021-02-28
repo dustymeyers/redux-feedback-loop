@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 // MATERIAL-UI
-import { Button, ButtonGroup } from '@material-ui/core';
+import { Button, ButtonGroup, TextField } from '@material-ui/core';
 
 /**
  * AdditionalComments Renders the Fourth Form View for Feedback
@@ -61,15 +61,19 @@ function AdditionalComments(){
 
   return(
     <>
-      <h2>How well are you understanding the content?</h2>
+      <h2>Do you have any additional comments?</h2>
       <form onSubmit={handleSubmit}>
-        <textarea
-          onChange={event => setComments(event.target.value)} 
+        <TextField
+          id="filled-multiline-flexible"
+          label="Additional Comments (optional)"
           placeholder="Please, feel free to share any additional comments you might have."
+          multiline
+          fullWidth
+          rows={4}
           value={comments}
-          rows="4" 
-          cols="50"
-        ></textarea>
+          onChange={event => setComments(event.target.value)}
+          variant="filled"
+        />
         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
           <Button onClick={handleBack}>Back</Button>
           <Button onClick={handleSubmit}>Next</Button>

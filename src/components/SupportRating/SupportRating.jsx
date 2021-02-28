@@ -73,7 +73,7 @@ function SupportRating() {
         <TextField 
           type="number" 
           id="filled-basic" 
-          label="How are you feeling?" 
+          label="Rate How Supported You Feel" 
           variant="filled" 
           placeholder="1 - 5" 
           min="1"
@@ -81,6 +81,7 @@ function SupportRating() {
           value={support}
           // forces the input value from string to number from submission
           onChange={event => setSupport(Number(event.target.value))} 
+          fullWidth
         />
         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
           <Button onClick={handleBack}>Back</Button>

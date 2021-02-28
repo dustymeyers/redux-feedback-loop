@@ -1,5 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Home.css';
+
+// MATERIAL-UI
+import Button from '@material-ui/core/Button';
 
 
 /**
@@ -10,6 +13,7 @@ import './Home.css';
  */
 function Home ({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
   console.log('isFeedbackSubmitted', isFeedbackSubmitted);
+  const history = useHistory();
 
   // Used for rendering sections of Home page.
   let homeMessage, buttonDisplay;
@@ -41,10 +45,13 @@ function Home ({isFeedbackSubmitted, setIsFeedbackSubmitted}) {
     <>
       <h2>Let us know how you're feeling this week!</h2>
       {homeMessage}
-      <div className="button">
-        <Link to="/question1">{buttonDisplay}</Link>
-      </div>
-      
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => history.push('/question1')}
+      >
+        {buttonDisplay}
+      </Button>
     </>
   );
 } // end Home

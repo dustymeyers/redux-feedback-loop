@@ -1,9 +1,15 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Admin({getFeedback}) {
+function Admin() {
+  const dispatch = useDispatch();
   const feedbackList = useSelector(store => store.feedbackList);
+
+  // on load of admin page, call server
+  useEffect(() => {
+    getFeedback();
+  }, []);
 
   const deleteFeedback = (feedbackId) => {
     console.log('delete clicked on', feedbackId);
@@ -18,7 +24,25 @@ function Admin({getFeedback}) {
       })
       .catch(err => console.log('There was an error deleting:', err))
   }
-  
+
+  // Takes all saved feedback data from DB stores in feedbackList reducer
+  // Axios get sends data to DB
+  const getFeedback = () => {
+    console.log('in getFeedback');
+    
+    // axios GET from DB
+    axios.get('/api/feedback')
+      .then(res => {
+        console.log('GET /api/feedback sent back rows:', res.data);
+
+        // set that data to a reducer state
+        dispatch({
+          type: 'SET_FEEDBACK_LIST',
+          payload: res.data
+        })
+      })
+      .catch(err => console.log('There was an error getting data:', err))
+  }
 
   return(
     <>

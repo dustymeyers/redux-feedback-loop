@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -18,38 +17,11 @@ import UnderstandingRating from '../UnderstandingRating/UnderstandingRating';
 
 
 function App() {
-  const dispatch= useDispatch();
-
   // Local state used for conditional rendering on Home page
   // On submission from ReviewFeedback, boolean is set to true
   // When the "give feedback" button is clicked on home, boolean is set to false
   const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState(false);
-
-  // on load of admin page, call server
-  useEffect(() => {
-    console.log();
-    getFeedback();
-  }, []);
-
-  // Takes all saved feedback data from DB stores in feedbackList reducer
-  // Axios get sends data to DB
-  const getFeedback = () => {
-    console.log('in getFeedback');
-    
-    // axios GET from DB
-    axios.get('/api/feedback')
-      .then(res => {
-        console.log('GET /api/feedback sent back rows:', res.data);
-
-        // set that data to a reducer state
-        dispatch({
-          type: 'SET_FEEDBACK_LIST',
-          payload: res.data
-        })
-      })
-      .catch(err => console.log('There was an error getting data:', err))
-  }
-
+  
   return (
     <div className='App'>
       
@@ -100,7 +72,7 @@ function App() {
         </Route>
 
         <Route path="/admin">
-          <Admin getFeedback={getFeedback} />
+          <Admin />
         </Route>
 
       </Router>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 // MATERIAL-UI
-import { Button, ButtonGroup } from '@material-ui/core';
+import { Button, ButtonGroup, TextField } from '@material-ui/core';
 
 /**
  * SupportRating Renders the Third Form View for Feedback
@@ -70,14 +70,17 @@ function SupportRating() {
     <>
       <h2>How well are you being supported?</h2>
       <form onSubmit={handleSubmit}>
-        <input 
+        <TextField 
+          type="number" 
+          id="filled-basic" 
+          label="How are you feeling?" 
+          variant="filled" 
+          placeholder="1 - 5" 
+          min="1"
+          max="5"
+          value={support}
           // forces the input value from string to number from submission
           onChange={event => setSupport(Number(event.target.value))} 
-          type="number" 
-          placeholder="1 - 5" 
-          min = "1" 
-          max="5" 
-          value={support}
         />
         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
           <Button onClick={handleBack}>Back</Button>

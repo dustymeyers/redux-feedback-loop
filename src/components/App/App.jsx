@@ -100,7 +100,7 @@ function App() {
         </Route>
 
         <Route path="/admin">
-          <Admin />
+          <Admin getFeedback={getFeedback} />
         </Route>
 
       </Router>

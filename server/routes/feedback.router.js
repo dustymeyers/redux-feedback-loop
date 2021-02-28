@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 router.delete('/:id', (req, res) => {
   console.log('DELETE /api/feedback with id:', req.params.id);
 
-  // feedback id
+  // feedback id from admin
   let feedbackId = req.params.id;
 
   /**
@@ -17,7 +17,7 @@ router.delete('/:id', (req, res) => {
    */
 
   // SQL query to send to DB
-  let queryText = 'DELETE FROM "feedback" WHERE "id" = $1;'
+  let queryText = 'DELETE FROM "feedback" WHERE "id" = $1;';
 
   // pg query the DB w/ our queryText 
   pool.query(queryText, [feedbackId])
@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
    */
 
   // SQL query to send to DB
-  let queryText = 'SELECT * FROM "feedback" ORDER BY "date" ASC;';
+  const queryText = 'SELECT * FROM "feedback" ORDER BY "date" ASC;';
 
   // pg query the DB w/ our queryText 
   pool.query(queryText)
@@ -73,7 +73,7 @@ router.post('/', (req, res) => {
    */
 
   // SQL query to send to DB
-  let queryText = `
+  const queryText = `
     INSERT INTO "feedback"
       ("feeling", "understanding", "support", "comments")
     VALUES
@@ -102,8 +102,40 @@ router.post('/', (req, res) => {
 // PUT Route - /api/feedback/:id
 router.put('/:id', (req, res) => {
   
-  let feedbackId = req.params.id
+  // feedback id from admin
+  let feedbackId = req.params.id;
 
+  // new boolean value for flagged to be stored in DB
+  let flagBoolean = req.body.flagged;
+
+  /**
+   * Query to DB should look like:
+   * 
+   * UPDATE "feedback"
+   * SET "flagged" = TRUE
+   * WHERE "id" = 4;
+   */
+
+  // SQL query to send to DB
+  const queryText = 'UPDATE "feedback" SET "flagged" = $1 WHERE "id" = $2;';
+
+  // packages up the id and the new boolean value to change in DB
+  let queryArg = [
+    flagBoolean,  // $1
+    feedbackId   // $2
+  ];
+
+  console.log('id', feedbackId);
+  console.log('boolean to set', flagBoolean);
+  // pg query the DB w/ our queryText
+  pool.query(queryText, queryArg)
+  // On success, send back 200 - Okay
+  .then(dbRes => res.sendStatus(200))
+  // On failure, send back 500 - Internal Error 
+  .catch(err => {
+    console.log('There was an error:', err)
+    res.sendStatus(500);
+  });
 }) // End router.put / api/feedback/:id
 
 module.exports = router;

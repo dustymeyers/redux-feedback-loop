@@ -83,6 +83,7 @@ function SupportRating() {
           onChange={event => setSupport(Number(event.target.value))} 
           fullWidth
         />
+        <br />
         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
           <Button onClick={handleBack}>Back</Button>
           <Button onClick={handleSubmit}>Next</Button>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Admin.css';
 
 // MATERIAL-UI
-import { Button } from '@material-ui/core';
+import { Button, DataGrid } from '@material-ui/core';
 
 function Admin() {
   const dispatch = useDispatch();

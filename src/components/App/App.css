@@ -18,10 +18,11 @@
   font-size: large;
 }
 
-h4 {
-  font-style: italic;
+.App-main {
+  width: 75%;
+  margin: auto;
 }
 
-input {
-  width: 30%;
+h4 {
+  font-style: italic;
 }

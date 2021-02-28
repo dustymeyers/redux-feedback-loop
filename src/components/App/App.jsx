@@ -28,53 +28,54 @@ function App() {
         <h4>Don't forget it!</h4>
       </header>
 
-      <Router>
+      <main className='App-main'>
+        <Router>
 
-        {/* Home, Welcome Greeting */}
-        {/* Invites the user to engage with survey */}
-        <Route path="/" exact>
-          <Home 
-            isFeedbackSubmitted={isFeedbackSubmitted} 
-            setIsFeedbackSubmitted={setIsFeedbackSubmitted} 
-          />
-        </Route>
+          {/* Home, Welcome Greeting */}
+          {/* Invites the user to engage with survey */}
+          <Route path="/" exact>
+            <Home 
+              isFeedbackSubmitted={isFeedbackSubmitted} 
+              setIsFeedbackSubmitted={setIsFeedbackSubmitted} 
+            />
+          </Route>
 
-        {/* 1st view, Input Feeling Rating */}
-        {/* How are you feeling today? */}
-        <Route path="/question1">
-          <FeelingRating />
-        </Route>
+          {/* 1st view, Input Feeling Rating */}
+          {/* How are you feeling today? */}
+          <Route path="/question1">
+            <FeelingRating />
+          </Route>
 
-        {/* 2nd view, Input Understand Rating */}
-        {/* How well are you understanding the content? */}
-        <Route path="/question2">
-          <UnderstandingRating />
-        </Route>
+          {/* 2nd view, Input Understand Rating */}
+          {/* How well are you understanding the content? */}
+          <Route path="/question2">
+            <UnderstandingRating />
+          </Route>
 
-        {/* 3rd view, Input Support Rating */}
-        {/* How well are you being supported? */}
-        <Route path="/question3">
-            <SupportRating />
-        </Route>
+          {/* 3rd view, Input Support Rating */}
+          {/* How well are you being supported? */}
+          <Route path="/question3">
+              <SupportRating />
+          </Route>
 
-        {/* 4th view, Input Additional Comments */}
-        {/* Any comments you want to leave? */}
-        <Route path="/question4">
-          <AdditionalComments />
-        </Route>
+          {/* 4th view, Input Additional Comments */}
+          {/* Any comments you want to leave? */}
+          <Route path="/question4">
+            <AdditionalComments />
+          </Route>
 
-        {/* 5th view, Review Feedback Before Submission to DB */}
-        {/* Review your feedback before submission. */}
-        <Route path="/reviewFeedback">
-          <ReviewFeedback setIsFeedbackSubmitted={setIsFeedbackSubmitted} />
-        </Route>
+          {/* 5th view, Review Feedback Before Submission to DB */}
+          {/* Review your feedback before submission. */}
+          <Route path="/reviewFeedback">
+            <ReviewFeedback setIsFeedbackSubmitted={setIsFeedbackSubmitted} />
+          </Route>
 
-        <Route path="/admin">
-          <Admin />
-        </Route>
+          <Route path="/admin">
+            <Admin />
+          </Route>
 
-      </Router>
-
+        </Router>
+      </main>
     </div>
   );
 }

@@ -91,6 +91,34 @@ const feedback = (state = {}, action) => {
 // which have been retrieved using an axios GET.
 // This data will be mappable for admin view rendering.
 const feedbackList = (state = [], action) => {
+  if (action.type === 'SET_FEEDBACK_LIST') {
+    return action.payload;
+  }
+
+  /**
+   * State is now:
+   * 
+   * [
+   *  {
+   *    comments: "Doing Great!"
+   *    date: "2021-02-25T06:00:00.000Z"
+   *    feeling: 4
+   *    flagged: false
+   *    id: 1
+   *    support: 5
+   *    understanding: 4
+   *  },
+   *  {
+   *    comments: "This is hard!"
+   *    date: "2021-02-27T06:00:00.000Z"
+   *    feeling: 2
+   *    flagged: false
+   *    id: 1
+   *    support: 4
+   *    understanding: 1
+   *  }, ...etc.
+   * ]
+   */
   return state;
 } // end feedbackList reducer
 
